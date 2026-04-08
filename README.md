@@ -1,53 +1,141 @@
-# 🎹 Virtual-Hand-Controlled-Piano
+# Virtual Hand Controlled Piano
 
-This project is a real-time, hand-gesture-controlled virtual piano application built using Python, OpenCV, and MediaPipe. It transforms the user's webcam feed into an interactive instrument, allowing notes to be played by bending the fingertips over the projected on-screen keys.
+This project is a real-time virtual piano that uses your webcam, MediaPipe hand tracking, and OpenCV rendering. You play notes by hovering a fingertip over a piano key and bending the finger to trigger a press.
 
-✨ Project Demo:<br>
+## Features
 
-https://www.linkedin.com/posts/dhananjay-jaiswal_python-opencv-mediapipe-activity-7352610206398193665-QDVB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFFZA08BX6OKTQcoZqc35lnZX2f5IpgrC0Y
+- Real-time hand tracking with MediaPipe
+- Virtual piano keyboard rendered on the webcam feed
+- Hover, press, and sustain feedback on screen
+- Modular Python codebase for hand tracking, collision detection, rendering, and audio
 
-💡 How It Works:<br>
+## Project Structure
 
-Hand Tracking: Uses the MediaPipe framework to detect and track hand landmarks (specifically the fingertip and the PIP joint).
+```text
+Virtual-Hand-Controlled-Piano/
+|-- piano.py
+|-- audio.py
+|-- collision.py
+|-- hand_tracking.py
+|-- piano_layout.py
+|-- rendering.py
+|-- utils.py
+|-- requirements.txt
+|-- README.md
+```
 
-Gesture-to-Action Mapping:
+## How It Works
 
-Hovering: When a fingertip is positioned vertically within the key's detection zone.
+1. The webcam feed is captured with OpenCV.
+2. MediaPipe detects hand landmarks for visible fingers.
+3. Fingertip positions are checked against the on-screen piano key regions.
+4. A note is played when a fingertip is over a key and the finger bends enough to count as a press.
+5. The app shows the current hover, pressed, and sustained notes in real time.
 
-Pressing: When the vertical distance between the fingertip and the PIP joint is small (indicating a bend) and the fingertip is over the key.
+## Requirements
 
-Real-Time Feedback: Uses OpenCV to overlay the virtual keyboard onto the camera feed and updates the key colors on hover/press while simultaneously playing the corresponding note via the simpleaudio library.<br>
+- Python 3.10 or 3.11 recommended
+- A working webcam
+- Windows PowerShell
+- Piano `.wav` sample files
 
-🛠️ Configuration & Setup<br>
+## Python Dependencies
 
-Prerequisites<br>
-Python 3.x<br>
-A webcam connected to your computer.<br>
+Install the exact dependencies from:
 
-Step-by-Step Installation-><br>
+```powershell
+pip install -r requirements.txt
+```
 
-Clone the Repository:<br>
-git clone (https://github.com/Danny-cell/Virtual-Hand-Controlled-Piano)<br>
-cd Virtual_Piano_CV<br>
-Install Dependencies: All required libraries can be installed using the requirements.txt file:<br>
+Current pinned dependency note:
 
-pip install -r requirements.txt<br>
-Acquire Piano Sound Samples: This project requires individual piano note sound files.<br>
-Find a set of .wav audio files for the required notes (C3, D3, E3... up to C5, including all sharps).<br>
-Place all of these .wav files directly into the piano_wav/ directory within the project folder.<br>
+- `mediapipe==0.10.21` is used because this project relies on the legacy `mp.solutions.hands` API.
 
-Run the Application:<br>
-python virtual_piano.py<br>
-The application will start, opening a window displaying your live webcam feed with the virtual piano at the bottom.<br>
+## Setup
 
-🖐️ Usage and Interaction:<br>
+Clone the repository and create a virtual environment:
 
-Once the application is running:<br>
-Position your hands so they are clearly visible in the camera window.<br>
-The virtual piano keyboard will appear at the bottom of the screen.<br>
-To play a note, move a fingertip over a key and then bend that finger. The tip must cross the specified threshold to register a press.<br>
-Real-time status information (Hands Detected, Notes Pressing, Notes Hovering) is displayed in the top-left corner.<br>
+```powershell
+git clone https://github.com/Dannny-cell/Virtual-Hand-Controlled-Piano.git
+cd Virtual-Hand-Controlled-Piano
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
-:scroll: License
+## Audio Samples
 
-This project is open-source and released under the MIT License.
+This project expects piano note `.wav` files to be available in:
+
+```text
+D:\piano_wav
+```
+
+Each file should be named after the note, for example:
+
+```text
+c3.wav
+d3.wav
+e3.wav
+f3.wav
+g3.wav
+a3.wav
+b3.wav
+c4.wav
+c#3.wav
+d#3.wav
+...
+c5.wav
+```
+
+If your samples are stored somewhere else, update `DEFAULT_SAMPLES_DIR` in `audio.py`.
+
+## Run
+
+From the project folder:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python piano.py
+```
+
+## Controls
+
+- Show your hand clearly in front of the webcam
+- Move a fingertip over a piano key to hover it
+- Bend the finger downward to press the key
+- Press `q` to quit the application
+
+## Troubleshooting
+
+### MediaPipe error: `module 'mediapipe' has no attribute 'solutions'`
+
+Use the pinned dependency version:
+
+```powershell
+pip uninstall -y mediapipe
+pip install --no-cache-dir mediapipe==0.10.21
+```
+
+### No sound is playing
+
+- Make sure `D:\piano_wav` exists
+- Make sure the folder contains valid `.wav` files
+- Make sure the note names match the expected filenames
+
+### Webcam window does not open
+
+- Check that your webcam is connected
+- Close other apps that may already be using the camera
+- Make sure OpenCV installed successfully
+
+## Future Improvements
+
+- Make the sample directory configurable from an environment variable or command-line argument
+- Add unit tests for collision detection and note formatting
+- Add a proper `config.py` for runtime settings
+- Improve README setup with screenshots or GIFs
+
+## License
+
+This project is released under the MIT License.
