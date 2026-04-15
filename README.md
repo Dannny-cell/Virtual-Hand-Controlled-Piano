@@ -18,7 +18,8 @@
 
 A live demonstration of the project is available on LinkedIn:
 
-🔗 [Watch the demo on LinkedIn]([https://www.linkedin.com/in/dannny-cell](https://www.linkedin.com/posts/dhananjay-jaiswal_python-opencv-mediapipe-activity-7352610206398193665-QDVB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFFZA08BX6OKTQcoZqc35lnZX2f5IpgrC0Y)
+🔗 [Watch the demo on LinkedIn]
+([https://www.linkedin.com/in/dannny-cell](https://www.linkedin.com/posts/dhananjay-jaiswal_python-opencv-mediapipe-activity-7352610206398193665-QDVB?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFFZA08BX6OKTQcoZqc35lnZX2f5IpgrC0Y))
 
 ---
 
